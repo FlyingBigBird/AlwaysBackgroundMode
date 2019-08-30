@@ -11,6 +11,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) AVAudioPlayer *player;
+@property (nonatomic, weak) UIButton *playBtn;
 
 @end
 
@@ -51,7 +52,8 @@
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor redColor]];
     [self.view addSubview:btn];
-    
+    self.playBtn = btn;
+
     [btn addTarget:self action:@selector(playMusicBegin) forControlEvents:UIControlEventTouchUpInside];
 
 
@@ -60,9 +62,12 @@
 {
     if (self.player.isPlaying) {
         
+        [self.playBtn setTitle:@"播放" forState:UIControlStateNormal];
+
         [self.player pause];
     } else {
         
+        [self.playBtn setTitle:@"暂停" forState:UIControlStateNormal];
         [self.player prepareToPlay];
         [self.player play];
     }
